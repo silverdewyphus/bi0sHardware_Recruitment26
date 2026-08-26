@@ -1,0 +1,70 @@
+# MENU
+PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+
+# Level 0 -> Level 1
+ - list all files (combining -a -l -p -s gives info about the files in a neat manner by differentiating directories, and showing size)
+ - `cat` the `readme` file
+pswd: 6y2kwnwK6grgvwvpvLaa2T1cpFEKOhNR
+timetaken: 9m
+
+
+# Level 1 -> Level 2
+ - we log into Level 1 using `ssh bandit1@bandit.labs.overthewire.org -p 2220` instead of `ssh bandit0@bandit.labs.overthewire.org -p 2220`
+ - password is what we got in Level 0
+ - can't just use `cat -` because it asks for more input
+ - from a blog on Medium: The proper way to view content of dashed filename would be again to prefix the path of the file
+ - use `cat ./-`
+pswd: PK8fYLZg2hnHSz83plBL1iEPKdD3QToB
+timetaken: 14m 6s
+
+
+# Level 2 -> Level 3
+ - since the filename has spaces, `cat` thinks each word is a different file (as explained by that one senior in the bi0s CTF stall)
+ - from commandlinux.com: Use Quotation Marks Around the Filename
+ - I tried using quotes but I think because of the `--` at the start it thinks `spaces` is a command, so like the previous level we can use `./` to provide location of the file
+pswd: 7ZZ2LFrykP2zEyvBl4m3clcL7tGYJPME
+timetaken: 12m 45s
+
+
+# Level 3 -> Level 4
+ - display all files
+ - go to `inhere` directory using `cd ./inhere/`
+ - `cat` the "...Hiding-From-You" file
+pswd: xzTXq1rDJQVVAzdv5cHq1TQytTWufAMq
+timetaken: 1m 42s
+
+
+# Level 4 -> Level 5
+ - run `ls --help` to see that human-readable files can be listed using `ls -h`
+ - we get `-file00` to `-file09`
+ - if we `cat` each one of them, we get the password in `-file07`
+pswd: 6C7h9GD8M6ai5nr7wo1RonrzFjj9yIrG
+tiemtaken: 13m 20s
+
+
+# Level 5 -> Level 6
+ - in manpages.ubuntu.com:  -type c
+                            File is of type c
+
+                            -size n[cwbkMG]
+                            File uses less than, more than or exactly n units of space, rounding up.
+
+                            -executable
+                            Matches files which are executable
+
+ - we use `find -type f -size 1033c ! -executable` to show FILES of size 1033 BYTES which are NOT EXECUTABLE
+ - we get `./maybehere07/.file2`
+ - if we `cat` it, we get the password
+pswd: pXa26xhMWaC2SvDotA4r9EgZkulOeSBW
+timetaken: 16m 44s
+
+# Level 6 -> Level 7
+ - "somewhere on the server" => have to search the root directory( / )
+ - in manpages.ubuntu.com: Other primaries
+                           The primaries -atime, -ctime, -depth, -exec, -group, -links, -mtime, -nogroup, -nouser, -ok, -path, -print, -prune, -size, -user and -xdev are all supported.
+ - we can use `find / -type f -user bandit7 -group bandit6 -size 33c` to show FILES of size 33 BYTES which are owned by USER bandit7 and GROUP bandit6
+ - we see a hugeee list of files with "Permission denied" but one file is named `bandit7.password` in address: /var/lib/dpkg/info/bandit7.password
+ - we `cat` it.
+pswd: Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3
+timetaken: 6m 23s
