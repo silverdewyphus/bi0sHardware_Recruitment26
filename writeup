@@ -2,14 +2,14 @@
 PASSWORDS for each level are stored in /etc/somegame_pass/.
 
 
-# Level 0 -> Level 1
+# LEVEL 0 -> LEVEL 1
  - list all files (combining -a -l -p -s gives info about the files in a neat manner by differentiating directories, and showing size)
  - `cat` the `readme` file
 pswd: 6y2kwnwK6grgvwvpvLaa2T1cpFEKOhNR
 timetaken: 9m
 
 
-# Level 1 -> Level 2
+# LEVEL 1 -> LEVEL 2
  - we log into Level 1 using `ssh bandit1@bandit.labs.overthewire.org -p 2220` instead of `ssh bandit0@bandit.labs.overthewire.org -p 2220`
  - password is what we got in Level 0
  - can't just use `cat -` because it asks for more input
@@ -19,7 +19,7 @@ pswd: PK8fYLZg2hnHSz83plBL1iEPKdD3QToB
 timetaken: 14m 6s
 
 
-# Level 2 -> Level 3
+# LEVEL 2 -> LEVEL 3
  - since the filename has spaces, `cat` thinks each word is a different file (as explained by that one senior in the bi0s CTF stall)
  - from commandlinux.com: Use Quotation Marks Around the Filename
  - I tried using quotes but I think because of the `--` at the start it thinks `spaces` is a command, so like the previous level we can use `./` to provide location of the file
@@ -27,7 +27,7 @@ pswd: 7ZZ2LFrykP2zEyvBl4m3clcL7tGYJPME
 timetaken: 12m 45s
 
 
-# Level 3 -> Level 4
+# LEVEL 3 -> LEVEL 4
  - display all files
  - go to `inhere` directory using `cd ./inhere/`
  - `cat` the "...Hiding-From-You" file
@@ -35,7 +35,7 @@ pswd: xzTXq1rDJQVVAzdv5cHq1TQytTWufAMq
 timetaken: 1m 42s
 
 
-# Level 4 -> Level 5
+# LEVEL 4 -> LEVEL 5
  - run `ls --help` to see that human-readable files can be listed using `ls -h`
  - we get `-file00` to `-file09`
  - if we `cat` each one of them, we get the password in `-file07`
@@ -43,7 +43,7 @@ pswd: 6C7h9GD8M6ai5nr7wo1RonrzFjj9yIrG
 tiemtaken: 13m 20s
 
 
-# Level 5 -> Level 6
+# LEVEL 5 -> LEVEL 6
  - in manpages.ubuntu.com:  -type c
                             File is of type c
 
@@ -60,7 +60,7 @@ pswd: pXa26xhMWaC2SvDotA4r9EgZkulOeSBW
 timetaken: 16m 44s
 
 
-# Level 6 -> Level 7
+# LEVEL 6 -> LEVEL 7
  - "somewhere on the server" => have to search the root directory( / )
  - in manpages.ubuntu.com: Other primaries
                            The primaries -atime, -ctime, -depth, -exec, -group, -links, -mtime, -nogroup, -nouser, -ok, -path, -print, -prune, -size, -user and -xdev are all supported.
@@ -71,13 +71,13 @@ pswd: Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3
 timetaken: 6m 23s
 
 
-# Level 7 -> Level 8
+# LEVEL 7 -> LEVEL 8
  - we just `grep "millionth" data.txt` to find the line where `millionth` is present
 pswd: VR1ljMayciFxbnUokuQmJFw6QC9VKtub
 timetaken: 33s
 
 
-# Level 8 -> Level 9
+# LEVEL 8 -> LEVEL 9
  - if you `cat data.txt` you see a bunch of lines
  - if you `sort data.txt` you see that the repeating lines are together but it's still a hassle to go thru each one of them to find the unique one
  - but in the `--help` section of the `uniq` command you see `-c` which gives the count
@@ -86,7 +86,7 @@ pswd: EjmOSvuAu7sGAHqHVcBDPirRe9T03kxl
 timetaken: 2m 29s
 
 
-# Level 9 -> Level 10
+# LEVEL 9 -> LEVEL 10
  - if you do `whatis strings` you see: print the sequences of printable characters in files,
    so `strings` gives us human-readable strings.
  - we can grep the "==" symbol as it is preceded by *several* "=" characters
@@ -102,7 +102,7 @@ pswd: B0s2khmbT9u0geKuOoVGW3JZKhndE3BG
 timetaken: 6m
 
 
-# Level 10 -> Level 11
+# LEVEL 10 -> LEVEL 11
  - if I `cat data.txt  I see that there is only one line in the base64 encryption
  - in the `base64 --help` section we see a command `-d` which decodes the data,
    and since I only have 1 line, even if I decode the entire `data.txt` file, there is no harm.
@@ -113,7 +113,7 @@ pswd: pYfOY6HwUsDj5rL9UvyhU7MCmv8vN5Ro
 timetaken: 3m 26s
 
 
-# Level 11 -> Level 12
+# LEVEL 11 -> LEVEL 12
  - in all the commands given, if we run `whatis tr` we see: 
                                                         tr (1)               - Translate or delete characters
    which means that it's gonna let us translate one framework of letters to another when we define them as sets
@@ -127,7 +127,7 @@ pswd: GROozWPO8QyN0mGrjUkID0WCYkZiQxrN
 timetaken: 7m 46s
 
 
-# Level 12 -> Level 13
+# LEVEL 12 -> LEVEL 13
  - `cat data.txt` to get some random hex dump and "data2.bin" mentioned
  - `whatis xxd` gives: make a hex dump or do the reverse.
  - we run the given command to make a directory: `mktemp -d`, it created: /tmp/tmp.7q38FtQY3M
