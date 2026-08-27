@@ -69,3 +69,64 @@ timetaken: 16m 44s
  - we `cat` it.
 pswd: Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3
 timetaken: 6m 23s
+
+
+# Level 7 -> Level 8
+ - we just `grep "millionth" data.txt` to find the line where `millionth` is present
+pswd: VR1ljMayciFxbnUokuQmJFw6QC9VKtub
+timetaken: 33s
+
+
+# Level 8 -> Level 9
+ - if you `cat data.txt` you see a bunch of lines
+ - if you `sort data.txt` you see that the repeating lines are together but it's still a hassle to go thru each one of them to find the unique one
+ - but in the `--help` section of the `uniq` command you see `-c` which gives the count
+ - so, if we `sort data.txt | uniq -c` then we get the number of times each line repeats and we see only one line which repeats once, that is our password
+pswd: EjmOSvuAu7sGAHqHVcBDPirRe9T03kxl
+timetaken: 2m 29s
+
+
+# Level 9 -> Level 10
+ - if you do `whatis strings` you see: print the sequences of printable characters in files,
+   so `strings` gives us human-readable strings.
+ - we can grep the "==" symbol as it is preceded by *several* "=" characters
+ - so if we do `strings data.txt | grep "==" ` we get: 
+                                                       ========== the
+                                                       [==p+
+                                                       ========== password
+                                                       Y========== is
+                                                       ========== B0s2khmbT9u0geKuOoVGW3JZKhndE3BG
+   so the password must be the last string of characters.
+
+pswd: B0s2khmbT9u0geKuOoVGW3JZKhndE3BG
+timetaken: 6m
+
+
+# Level 10 -> Level 11
+ - if I `cat data.txt  I see that there is only one line in the base64 encryption
+ - in the `base64 --help` section we see a command `-d` which decodes the data,
+   and since I only have 1 line, even if I decode the entire `data.txt` file, there is no harm.
+ - on running `base64 -d data.txt` we get:  
+                                          The password is pYfOY6HwUsDj5rL9UvyhU7MCmv8vN5Ro
+
+pswd: pYfOY6HwUsDj5rL9UvyhU7MCmv8vN5Ro
+timetaken: 3m 26s
+
+
+# Level 11 -> Level 12
+ - in all the commands given, if we run `whatis tr` we see: 
+                                                        tr (1)               - Translate or delete characters
+   which means that it's gonna let us translate one framework of letters to another when we define them as sets
+ - in the `Implementation` heading of the Wikipedia page of ROT13 (Helpful Reading Material) we see that:
+   we can define the sets for `tr` as: SET1 => 'A-Za-z' and SET2 => 'N-ZA-Mn-za-m'
+ - we use this because we need characters from A to M to be printed as N to Z and characters from N to Z to be printed as A to M
+ - we run `cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m' ` we get: 
+                                                              The password is GROozWPO8QyN0mGrjUkID0WCYkZiQxrN
+
+pswd: GROozWPO8QyN0mGrjUkID0WCYkZiQxrN
+timetaken: 7m 46s
+
+
+# Level 12 -> Level 13
+pswd: qQYQiHOBPR8zR61qxYqX45quvihF2uzk
+timetaken: 25m 23s
