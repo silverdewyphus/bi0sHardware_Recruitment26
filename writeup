@@ -128,5 +128,55 @@ timetaken: 7m 46s
 
 
 # Level 12 -> Level 13
+cat data.txt to get some random hex dump and "data2.bin" mentioned
+whatis xxd -> make a hex dump or do the reverse.
+given command: mktemp -d, it created: /tmp/tmp.7q38FtQY3M
+we make a copy of "data.txt" im the folder created by cd /tmp/tmp.7q38FtQY3M
+we go to that temp folder
+if we list files using ls we get data.txt
+
+xxd -h gives  us that -r can be used to reverse the compression
+we do: xxd -r data.txt > data to store the reverted file in "data"
+since we don't know what exactly is the reverted data we do: file data
+
+we get: data: gzip compressed data, was "data2.bin"
+
+if we do gzip -h we see that we can use gzip -d to decompress
+
+we move the data.gz  (file extension for gzip is .gz) file to newfile.gz to avoid loss of data
+
+we decompress the newfile.gz by: gzip -d newfile.gz
+when we list (ls) we get: data.txt newfile
+if we run `file newfile` we get: newfile: bzip2 compressed data
+to decompress bzip2 files we can use -d (mentioned in -h)
+we rename newfile as newfile.bz2 (file extension for bzip2 is .bz2) to avoid errors while decompressing
+if we decompress it by: bzip2 -d newfile.bz2 and list (ls) we get: data.txt newfile
+file newfile, returns: newfile: gzip compressed data, was "data4.bin"
+since this is now a gzip, we rename it to newfile.gz
+then we decompress using: gzip -d newfile
+now if we run   `file newfile` we get: newfile: POSIX tar archive (GNU)
+since this is a tar compressed file, we rename it to newfile.tar
+in `tar --help` we see that to extract a tar file we run `tar -xf filename.tar`
+now we do: tar -xf newfile.tar, when we run `ls` after that we see:
+data.txt data5.bin newfile.tar
+
+if we run `file data5.bin` we get: data5.bin: POSIX tar archive (GNU)
+since this is a tar file, we change the name of data5.bin to data5.tar
+now we extract data5.tar using `tar -xf data5.tar` and then `ls` to get: data.txt  data5.tar  data6.bin  newfile.tar
+
+we run `file data6.bin` to get: data6.bin: bzip2 compressed data
+we rename it to a .bz2 file and then decompress and the `ls` to get:data.txt  data5.tar  data6  newfile.tar
+ 
+if we `file data6` we get: data6: POSIX tar archive (GNU)
+so we rename it to `data6.tar` and then extract it and then `ls` to get: data.txt  data5.tar  data6.tar  data8.bin  newfile.tar
+
+we run `file data8.bin` to get: data8.bin: gzip compressed data, was "data9.bin"
+since it is gzip, we rename it to data8.gz and then decompress it
+
+now if we `ls` we get: data.txt  data5.tar  data6.tar  data8  newfile.tar
+if we check the filetype of data8 using: `file data8` we get: data8: ASCII text
+(FINALLY YAY!) 
+we can now `cat data8` to get: The password is qQYQiHOBPR8zR61qxYqX45quvihF2uzk
+
 pswd: qQYQiHOBPR8zR61qxYqX45quvihF2uzk
 timetaken: 25m 23s
