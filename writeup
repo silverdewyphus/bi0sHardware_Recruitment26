@@ -180,12 +180,60 @@ timetaken: 25m 23s
                           -rw-r-----   1 bandit14 bandit13 2602 Jun 24 14:58 sshkey.private
  - we see that the USER can READ&WRITE, the GROUP can READ ONLY and OTHERS have NO PERMS 
    (according to the table in Wikipedia's articel on `chmod`)
- - since the user is `bandit14`, they have all the required permissions, but OTHERS don't, so we need to set it 
+ - since we only want the user `bandit14` to have access to the PRIVATE SSH Key and not others, 
+   we change the mode to 600 using `chmod 600 sshkey.private`
  - in `man ssh` we get:
                -i  identity_file
                              Selects a file from which the identity (private key) for public key authentication is read.  You can
                              also specify a public key file to use the corresponding private key that is loaded  in  ssh-agent(1)
                              when  the  private  key file is not present locally.
-and in the SSH/OpenSSH/Keys link given, the
+ - but, it is mentioned in point 3 of the HINT file (`cat HINT`), we can not log into another level via localhost and since the SSH Key is private, we can not use band14@bandit.labs.overthewire.org
+ - if we make a copy of this SSH Key in our own system, with our own protection, we can bypass the issue (is what I thought), so:
+    `cat sshkey.private` to get the Key, copy it using `ctrl+shift+c` BUT if you create the file inside the bandit13 dir, as it says:
+       `Could not create directory '/home/bandit13/.ssh' (Permission denied).`
+ - after we copy the SSH Key(with the line above and below it), we exit bandit13 and make a new file in our system,
+   `nano bandit14user.key` and paste the SSH Key in the text editor `nano`, save it and exit the editor
+       - if we try to log into bandit14 with this user key, by `ssh -i bandit14user.key bandit14@bandit.labs.overthewire.org -p 2220 `,
+         we get an error saying 
+         WARNING: UNPROTECTED PRIVATE KEY FILE!
+         Permissions 0644 for 'bandit14user.key' are too open.
+         It is required that your private key files are NOT accessible by others.
+       - so we need to do `chmod 600 bandit14user.key` to make sure it's only READ&WRITE for the USER, which is bandit14 here
+ - now we can run `ssh -i bandit14user.key bandit14@bandit.labs.overthewire.org -p 2220 `, to successfully log into level 14 as bandit14
+   we can confirm this using `whoami` which returns `bandit14` 
+ - in the Level Goal, the address for the password is given as: /etc/bandit_pass/bandit14
+   so we `cat /etc/bandit_pass/bandit14` to get:    aaWecNkG4FhxJQxz07uiwzVP6bJiYS6
+
 pswd: aaWecNkG4FhxJQxz07uiwzVP6bJiYS65
-timetaken: 26m 57s
+timetaken: 36m 57s
+
+
+# LEVEL 14 -> LEVEL 15
+ - if we do `man nc` we get:
+       It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port scanning, and
+       deal  with  both  IPv4 and IPv6.
+ - and the syntax is: `nc [destination] [port] `
+ - we run `nc localhost 30000` as mentioned in the Level Goal 
+   and in the input line, we give the password of this level which is: aaWecNkG4FhxJQxz07uiwzVP6bJiYS65
+ - it returns: 
+               Correct!
+               pbLYuZtTg4MgaqfJx8jbA9gKKGqM68A7
+
+pswd: pbLYuZtTg4MgaqfJx8jbA9gKKGqM68A7
+timetaken: 13m 47s
+
+
+# LEVEL 15 -> LEVEL 16
+ - in `man openssl` we see:
+                           s_client
+                                    This implements a generic SSL/TLS client which can establish a transparent  connection  to  a  remote  server
+                                    speaking  SSL/TLS.
+ - so we run `openssl s_client localhost:30001` as specified,
+    in the input line, we give the password of this level which is: pbLYuZtTg4MgaqfJx8jbA9gKKGqM68A7
+ - it returns: 
+              Correct!
+              kS0Hf0u5HiXFwKMKFqXvPdOTNGGa0X8V
+
+pswd: kS0Hf0u5HiXFwKMKFqXvPdOTNGGa0X8V
+timetaken: 8m 11s
+
