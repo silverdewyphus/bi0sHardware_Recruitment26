@@ -237,3 +237,26 @@ timetaken: 13m 47s
 pswd: kS0Hf0u5HiXFwKMKFqXvPdOTNGGa0X8V
 timetaken: 8m 11s
 
+
+# LEVEL 16 -> LEVEL 17 
+ - `nmap` is a port scanner
+ - in `man nmap` we see:
+                        PORT SPECIFICATION AND SCAN ORDER:
+                        -p <port ranges>: Only scan specified ports
+ - if we run `nmap localhost -p 31000-32000` we get 5 open tcp ports [31046, 31518, 31691, 31790, 31960]
+ - in `man ncat` we see:
+                        --ssl                  Connect or listen with SSL
+ - we check connections with each port now, by running: `ncat --ssl localhost 31046` for port 31046 and similarly for the others
+   - 31046: Input/output error
+   - 31518: returned the same thing that I entered
+   - 31691: Input/output error
+   - 31790: gives an OPENSSH PRIVATE KEY
+   - 31960: Input/output error
+ - now that we have the SSH Key, we need to repeat the same thing we did in Level 13 
+   (I will not write the steps again because the only thing that is going to change is the filename and user)
+ - once we're logged into bandit17, we can go see the password using `cat /etc/bandit_pass/bandit17`
+pswd: pWXMAZoxGC8JmDMfmT5MGEsobMM3vnj2
+timetaken: 13m 55s
+
+
+# LEVEL 17 -> LEVEL 18
