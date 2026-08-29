@@ -344,13 +344,16 @@ timetaken: 2m
  - so, here, to run that `bandit20-do` file, we give the command: `./bandit20-do`,
    this returns:    Run a command as another user.
  - so, we basically act as bandit20 while using this
- - we can try to get the passwords by doing:    `./bandit20-do cat /etc/bandit_pass`
-   for which we get:    cat: /etc/bandit_pass: Is a direct
+ - if we do    `cd /etc/bandit_pass/ `  and then  ` cat bandit20` we get: 
+                                                                   cat: bandit20: Permission denied
+ - we can try to get the passwords by acting like bandit20 by using:
+                                                                   `./bandit20-do cat /etc/bandit_pass`
+   for which we get:    cat: /etc/bandit_pass: Is a directory
  - so now we can do:    /bandit20-do cat /etc/bandit_pass/bandit20
    to get:    4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA
 
 pswd: 4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA
-tiemtaken: 4m
+tiemtaken: 7m
 
 
 
