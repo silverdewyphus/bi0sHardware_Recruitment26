@@ -9,38 +9,52 @@ pswd: 6y2kwnwK6grgvwvpvLaa2T1cpFEKOhNR
 timetaken: 9m
 
 
+
+
 # LEVEL 1 -> LEVEL 2
  - we log into Level 1 using `ssh bandit1@bandit.labs.overthewire.org -p 2220` instead of `ssh bandit0@bandit.labs.overthewire.org -p 2220`
  - password is what we got in Level 0
  - can't just use `cat -` because it asks for more input
  - from a blog on Medium: The proper way to view content of dashed filename would be again to prefix the path of the file
  - use `cat ./-`
+
 pswd: PK8fYLZg2hnHSz83plBL1iEPKdD3QToB
 timetaken: 14m 6s
+
+
 
 
 # LEVEL 2 -> LEVEL 3
  - since the filename has spaces, `cat` thinks each word is a different file (as explained by that one senior in the bi0s CTF stall)
  - from commandlinux.com: Use Quotation Marks Around the Filename
  - I tried using quotes but I think because of the `--` at the start it thinks `spaces` is a command, so like the previous level we can use `./` to provide location of the file
+
 pswd: 7ZZ2LFrykP2zEyvBl4m3clcL7tGYJPME
 timetaken: 12m 45s
+
+
 
 
 # LEVEL 3 -> LEVEL 4
  - display all files
  - go to `inhere` directory using `cd ./inhere/`
  - `cat` the "...Hiding-From-You" file
+
 pswd: xzTXq1rDJQVVAzdv5cHq1TQytTWufAMq
 timetaken: 1m 42s
+
+
 
 
 # LEVEL 4 -> LEVEL 5
  - run `ls --help` to see that human-readable files can be listed using `ls -h`
  - we get `-file00` to `-file09`
  - if we `cat` each one of them, we get the password in `-file07`
+
 pswd: 6C7h9GD8M6ai5nr7wo1RonrzFjj9yIrG
 tiemtaken: 13m 20s
+
+
 
 
 # LEVEL 5 -> LEVEL 6
@@ -56,8 +70,11 @@ tiemtaken: 13m 20s
  - we use `find -type f -size 1033c ! -executable` to show FILES of size 1033 BYTES which are NOT EXECUTABLE
  - we get `./maybehere07/.file2`
  - if we `cat` it, we get the password
+
 pswd: pXa26xhMWaC2SvDotA4r9EgZkulOeSBW
 timetaken: 16m 44s
+
+
 
 
 # LEVEL 6 -> LEVEL 7
@@ -67,14 +84,20 @@ timetaken: 16m 44s
  - we can use `find / -type f -user bandit7 -group bandit6 -size 33c` to show FILES of size 33 BYTES which are owned by USER bandit7 and GROUP bandit6
  - we see a hugeee list of files with "Permission denied" but one file is named `bandit7.password` in address: /var/lib/dpkg/info/bandit7.password
  - we `cat` it.
+
 pswd: Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3
 timetaken: 6m 23s
 
 
+
+
 # LEVEL 7 -> LEVEL 8
  - we just `grep "millionth" data.txt` to find the line where `millionth` is present
+
 pswd: VR1ljMayciFxbnUokuQmJFw6QC9VKtub
 timetaken: 33s
+
+
 
 
 # LEVEL 8 -> LEVEL 9
@@ -82,8 +105,11 @@ timetaken: 33s
  - if you `sort data.txt` you see that the repeating lines are together but it's still a hassle to go thru each one of them to find the unique one
  - but in the `--help` section of the `uniq` command you see `-c` which gives the count
  - so, if we `sort data.txt | uniq -c` then we get the number of times each line repeats and we see only one line which repeats once, that is our password
+
 pswd: EjmOSvuAu7sGAHqHVcBDPirRe9T03kxl
 timetaken: 2m 29s
+
+
 
 
 # LEVEL 9 -> LEVEL 10
@@ -102,6 +128,8 @@ pswd: B0s2khmbT9u0geKuOoVGW3JZKhndE3BG
 timetaken: 6m
 
 
+
+
 # LEVEL 10 -> LEVEL 11
  - if I `cat data.txt  I see that there is only one line in the base64 encryption
  - in the `base64 --help` section we see a command `-d` which decodes the data,
@@ -111,6 +139,8 @@ timetaken: 6m
 
 pswd: pYfOY6HwUsDj5rL9UvyhU7MCmv8vN5Ro
 timetaken: 3m 26s
+
+
 
 
 # LEVEL 11 -> LEVEL 12
@@ -125,6 +155,8 @@ timetaken: 3m 26s
 
 pswd: GROozWPO8QyN0mGrjUkID0WCYkZiQxrN
 timetaken: 7m 46s
+
+
 
 
 # LEVEL 12 -> LEVEL 13
@@ -175,6 +207,8 @@ pswd: qQYQiHOBPR8zR61qxYqX45quvihF2uzk
 timetaken: 25m 23s
 
 
+
+
 # LEVEL 13 -> LEVEL 14
  - if we `l -alps` we get:
                           -rw-r-----   1 bandit14 bandit13 2602 Jun 24 14:58 sshkey.private
@@ -208,6 +242,8 @@ pswd: aaWecNkG4FhxJQxz07uiwzVP6bJiYS65
 timetaken: 36m 57s
 
 
+
+
 # LEVEL 14 -> LEVEL 15
  - if we do `man nc` we get:
        It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port scanning, and
@@ -223,6 +259,8 @@ pswd: pbLYuZtTg4MgaqfJx8jbA9gKKGqM68A7
 timetaken: 13m 47s
 
 
+
+
 # LEVEL 15 -> LEVEL 16
  - in `man openssl` we see:
                            s_client
@@ -236,6 +274,8 @@ timetaken: 13m 47s
 
 pswd: kS0Hf0u5HiXFwKMKFqXvPdOTNGGa0X8V
 timetaken: 8m 11s
+
+
 
 
 # LEVEL 16 -> LEVEL 17 
@@ -259,4 +299,62 @@ pswd: pWXMAZoxGC8JmDMfmT5MGEsobMM3vnj2
 timetaken: 13m 55s
 
 
+
+
 # LEVEL 17 -> LEVEL 18
+- run `diff passwords.old passwords.new` to get:
+       42c42
+       < qOg5pVOjPx9x9VccyYBADiT4xxyoUB8D
+       ---
+       > OQxXZjELndr90zuhOTDYBEomI0SZITXI
+ - the first line is the line from `passwords.old` and the second line is the one from `passwords.new`
+   so the second line must be the password.
+
+pswd: OQxXZjELndr90zuhOTDYBEomI0SZITXI
+timetaken: 47s
+
+
+
+
+# LEVEL 18 -> LEVEL 19
+ - if we try to log in to bandit18, we get logged out
+ - in `man ssh` we see:
+     ssh [-46AaCfGgKkMNnqsTtVvXxYyZ] [-B bind_interface] [-b bind_address] [-c cipher_spec]
+         [-D [bind_address:]port] [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11] [-i identity_file]
+         [-J destination] [-L address] [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-P tag] [-p port]
+         [-R address] [-S ctl_path] [-W host:port] [-w local_tun[:remote_tun]] destination [command [argument ...]]
+ - so, we can pass commands into bandit18 without actually logging in and risking getting logged out due to `.bashrc`
+ - when we run:    ssh bandit18@bandit.labs.overthewire.org -p 2220 ls
+   we get:    readme
+ - when we run:    ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme
+   we get:    KpsOfPkcP7i1FlIExk2QEjyt6dw8dxZI
+ - this must be the password for the next level as mentioned in the Level Goal
+
+pswd: KpsOfPkcP7i1FlIExk2QEjyt6dw8dxZI
+timetaken: 2m
+
+
+
+
+# LEVEL 19 -> LEVEL 20
+ - run `ls -alps` to see that `bandit20-do` is a file
+ - run `file bandit20-do` to get:
+   bandit20-do: setuid ELF 32-bit LSB executable
+ - to run executables (let the filename be `execFILE`), we use: `./execFILE
+ - so, here, to run that `bandit20-do` file, we give the command: `./bandit20-do`,
+   this returns:    Run a command as another user.
+ - so, we basically act as bandit20 while using this
+ - we can try to get the passwords by doing:    `./bandit20-do cat /etc/bandit_pass`
+   for which we get:    cat: /etc/bandit_pass: Is a direct
+ - so now we can do:    /bandit20-do cat /etc/bandit_pass/bandit20
+   to get:    4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA
+
+pswd: 4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA
+tiemtaken: 4m
+
+
+
+
+# LEVEL 20 -> LEVEL 21
+pswd:
+timetaken:
